@@ -6,6 +6,7 @@
     "fmt",
     "sqlite3"
   ],
+  "description": "",
   "name": "vcpkg-template",
   "version-string": ""
 }
