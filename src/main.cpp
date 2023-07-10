@@ -5,4 +5,5 @@
 int main()
 {
     fmt::print("SQLite version: {}\n", sqlite3_libversion());
+    return 0;
 }
