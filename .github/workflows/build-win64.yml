@@ -1,0 +1,27 @@
+name: build-win64
+
+permissions:
+  contents: write
+  
+on: [push, pull_request]
+
+jobs:
+  build:
+    # Skip building pull requests from the same repository.
+    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) }}
+    runs-on: windows-2022
+    steps:
+    
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Build
+      run: |
+        cmake -Bbuild 
+        cmake --build build --config Release
+    
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ${{ github.event.repository.name }}-${{ github.sha }}
+        path: |
+          build/Release
